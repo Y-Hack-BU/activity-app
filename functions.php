@@ -182,4 +182,33 @@ function InsertPingMatch($pid1, $pid2, $uid1, $uid2) {
 	}
 	return true;
 }
+
+function GetName($user_id) {
+	$query = mysql_query("SELECT fname, lname FROM users WHERE fb_uid = $user_id;");
+	if (!$query) {
+		die("Query error");
+	}
+	$res = mysql_fetch_assoc($query);
+	return $res['fname']." ".$res['lname'];
+}
+
+function WantsToCaption($pingdata) {
+	if ($pingdata['type'] == 0) {
+		return "Wants to get food";
+	} else if ($pingdata['type'] == 1) {
+		return "Wants to study";
+	} else if ($pingdata['type'] == 2) {
+		return "Wants to go to an event";
+	} else {
+		return "Wants to get active";
+	}
+}
+
+function TimeCaption($pingdata) {
+	if (intval($pingdata['start']) < time()) {
+		return "@ Now";
+	} else {
+		return date("D m.d.y", intval($pingdata['start']));
+	}
+}
 ?>
