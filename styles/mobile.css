@@ -1,0 +1,117 @@
+body {
+	width: 100%;
+	margin: 0;
+	background: #f4f4f4;
+}
+
+.header {
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	height: 50px;
+	background: #2080b8;
+	opacity: 0.9;
+}
+
+.header_logo {
+	display: block;
+	position: absolute;
+	left: 0px;
+	margin-left: 0px;
+	margin-top: 15px;
+	color: white;
+	font-size: 27px;
+}
+
+.header_logo span {
+	margin-left: 40px;
+}
+
+.header_logo img {
+	display: block;
+	position: absolute;
+	width: 40px;
+	height: 50px;
+	margin-top: -17px;
+}
+
+#main_buttons {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: 210px;
+	left: 0;
+	margin: 0;
+}
+
+#main_question {
+	display: block;
+	position: relative;
+	text-align: center;
+	font-size: 19px;
+	margin: 15px 0 15px 0;
+}
+
+.type_button {
+	display: block;
+	position: absolute;
+	height: 50px;
+	width: 130px;
+	text-align: center;
+	background-color: white;
+	border: solid transparent;
+	border-color: rgba(0,0,0,.2);
+	border-radius: 3px;
+	border-width: 1px 1px 2px 1px;
+	border-left: 1px solid red;
+}
+
+.choose_type {
+	display: block;
+	position: relative;
+	margin-top: 65px;
+	height: 200px;
+	width: 300px;
+	left: 50%;
+	margin-left: -150px;
+	border: 1px solid black;
+	background: white;
+	border: solid transparent;
+	border-color: rgba(0,0,0,.2);
+	border-radius: 3px;
+	border-width: 1px 1px 2px 1px;
+}
+
+.type_button span {
+	display: block;
+	margin-top: 15px;
+}
+
+#food_button, #event_button {
+	left: 50%;
+	margin-left: -135px;
+}
+
+#study_button, #active_button {
+	left: 50%;
+	margin-left: 5px;
+}
+
+#event_button, #active_button {
+	top: 60px;
+}
+
+#login_pinguin {
+	display: block;
+	position: relative;
+	left: 50%;
+	margin-left: -80px;
+	margin-top: 70px;
+	width: 160px;
+	height: 200px;
+}
+
+#login_facebook {
+	text-align: center;
+	font-size: 18px;
+}
