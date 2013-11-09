@@ -67,27 +67,52 @@ function SetUpSQL() {
 }
 
 function DeletePing($user_id, $pingid) {
-
+	$query = mysql_query("DELETE * FROM pings WHERE owner_uid = $user_id AND $id = $pingid;");
+	if (!$query) {
+		die("Query error");
+	}
+	return true;
 }
 
 function GetMyPendingPings($user_id) {
-	//GetUnexpiredPings($user_id)
+	return GetUnexpiredPings($user_id);
 }
 
-function InsertPing($user_id, $type, $detail, $start, $duration) {
-
+function InsertPing($user_id, $type, $detail, $start, $duration, $flids) {
+	$now = time();
+	$query = mysql_query("INSERT INTO pings (owner_uid, type, detail, start, duration, time) VALUES ($user_id, $type, '".mysql_real_escape_string($detail)."', $start, $duration, $now);");
+	if (!$query) {
+		die("Query error");
+	}
+	foreach ($flids as $flid) {
+		$query = mysql_query("INSERT INTO ping_perm (pingid, flid) VALUES (".mysql_insert_id().", $flid);");
+		if (!$query) {
+			die("Query error");
+		}
+	}
+	return true;
 }
 
 function GetUnexpiredPings($user_id) {
-	
-	//SELECT * FROM pings WHERE start+duration > currenttime AND owner_uid = $result
+	$now = time();
+	$query = mysql_query("SELECT id FROM pings WHERE SUM(start + duration) > $now AND owner_uid = $user_uid");
+	while ($row = mysql_fetch_assoc($query)) {
+    	$ret[] = $row['id'];
+	}
+	return $ret;
+}
+
+function GetPingData($ping_id) {
+	$query = mysql_query("SELECT * FROM pings WHERE id = $ping_id LIMIT 1");
+	$row = mysql_fetch_assoc($query);
+	return $row;	
 }
 
 function GetAllFriendlyPings($user_id) {
 	//SELECT flid FROM group_mems WHERE fid = $user_id
 	//foreach flid as $result:
-		//SELECT fb_uid FROM groups WHERE flid = $result
-		//GetUnexpiredPings(fb_uid)
+		//SELECT pingid FROM ping_perm WHERE flid = $result
+		//SELECT * FROM pings WHERE pingid = $result
 		//append $results as potential matching pings
 	//return results
 }

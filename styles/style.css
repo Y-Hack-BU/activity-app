@@ -1,3 +1,7 @@
+@font-face {
+    font-family: 'Open Sans', sans-serif;
+}
+
 body {
 	margin: 0;
 	background: #f4f4f4;
@@ -17,6 +21,7 @@ body {
 	margin-top: 6px;
 	color: white;
 	font-size: 24px;
+	font-family: 'Open Sans';
 }
 
 .choose_type {
@@ -44,13 +49,16 @@ body {
 	margin-left: -200px;
 }
 
+/* ------------------------------- */
 #main_question {
 	display: block;
 	position: relative;
 	text-align: center;
 	font-size: 19px;
 	margin: 25px 0 20px 0;
+	font-family: 'Open Sans';
 }
+/* ------------------------------- */
 
 .type_button {
 	display: block;
@@ -65,11 +73,13 @@ body {
 	border-width: 1px 1px 2px 1px;
 	text-align: center;
 	border-left: 1px solid red;
+	font-family: 'Open Sans';
 }
 
 .type_button span {
 	display: block;
 	margin-top: 35px;
+	font-family: 'Open Sans';
 }
 
 #food_button, #study_button, #event_button {
