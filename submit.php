@@ -18,6 +18,9 @@ $duration = intval($_POST['duration']);
 $offset = intval($a2[0]) * 3600 + intval($a2[1])*60;
 $flids = array();
 $start = strtotime($_POST['sdate']) + $offset;
+if ($_POST['group1'] == "Now") {
+	$start = time();
+}
 foreach ($_POST as $k=>$v) {
 	if (substr($k, 0, 5) == "flid_") {
 		$flids[] = end(explode("flid_", $k));
