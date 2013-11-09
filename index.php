@@ -103,7 +103,7 @@ foreach ($feed as $pingid) {
 		<img id = "login_pinguin" src = "../img/pinguin_logo.png" />
 		
 		<div id="login_with_fb">
-		<a href="<?=$login_url?>"><img src="login_with_facebook.png" /></a>
+		<a href="<?=$login_url?>"><img src="../img/login_with_facebook.png" /></a>
 		</div>
 		
 	</body>
