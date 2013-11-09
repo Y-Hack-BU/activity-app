@@ -1,7 +1,12 @@
+@font-face {
+    font-family: 'Open Sans', sans-serif;
+}
+
 body {
 	width: 100%;
 	margin: 0;
 	background: #f4f4f4;
+	font-family: 'Open Sans';
 }
 
 .header {
@@ -19,7 +24,7 @@ body {
 	position: absolute;
 	left: 0px;
 	margin-left: 0px;
-	margin-top: 15px;
+	margin-top: 11px;
 	color: white;
 	font-size: 27px;
 }
@@ -33,7 +38,7 @@ body {
 	position: absolute;
 	width: 40px;
 	height: 50px;
-	margin-top: -17px;
+	margin-top: -14px;
 }
 
 #main_buttons {
@@ -75,7 +80,6 @@ body {
 	width: 300px;
 	left: 50%;
 	margin-left: -150px;
-	border: 1px solid black;
 	background: white;
 	border: solid transparent;
 	border-color: rgba(0,0,0,.2);
@@ -102,6 +106,63 @@ body {
 	top: 60px;
 }
 
+.timeline {
+	display: block;
+	position: relative;
+	margin: 0 0 20px 0;
+}
+
+.timeline .timeline_item {
+	display: block;
+	position: relative;
+	width: 260px;
+	padding: 0px 20px 0px 20px;
+	left: 50%;
+	margin: 15px 0 0 -150px;
+	background: white;
+	border: solid transparent;
+	border-color: rgba(0,0,0,.2);
+	border-radius: 3px;
+	border-width: 1px 1px 2px 1px;
+}
+
+.timeline .timeline_item img {
+	display: block;
+	position: absolute;
+	width: 17px;
+	height: 17px;
+	z-index: 2;
+	right: 3px;
+	top: 2px;
+}
+
+.timeline .timeline_item .timeline_name {
+	display: block;
+	position: relative;
+	color: white;
+	width: 270px;
+	margin-left: -20px;
+	padding-left: 30px;
+	background: #2080b8;
+}
+
+.timeline .timeline_item .timeline_wants_to {
+	display: block;
+	position: relative;
+}
+
+.timeline .timeline_item .timeline.time {
+	display: block;
+	position: relative;
+}
+
+.timeline .timeline_item .timeline_details {
+	display: block;
+	position: relative;
+	color: grey;
+	font-style: italic;
+}
+
 #login_pinguin {
 	display: block;
 	position: relative;
@@ -120,12 +181,11 @@ body {
 .add_details {
 	display: block;
 	position: relative;
-	padding: 0 20px 0 20px;
+	padding: 0 20px 10px 20px;
 	margin: 70px 0 10px 0;
-	width: 240px;
+	width: 260px;
 	left: 50%;
-	margin-left: -140px;
-	height: 80px;
+	margin-left: -150px;
 	font-size: 18px;
 	border: 1px solid black;
 	background-color: white;
@@ -151,9 +211,9 @@ body {
 	display: block;
 	position: relative;
 	padding: 0 20px 0 20px;
-	width: 240px;
+	width: 260px;
 	left: 50%;
-	margin-left: -140px;
+	margin-left: -150px;
 	background-color: white;
 	border: solid transparent;
 	border-color: rgba(0,0,0,.2);
@@ -211,12 +271,12 @@ body {
 	margin: 15px 0 0 120px;
 }
 
-.when_next_button {
+.when_next_button, .who_submit_button {
 	display: block;
 	position: relative;
-	width: 280px;
+	width: 300px;
 	left: 50%;
-	margin: 10px 0 0 -140;
+	margin: 10px 0 0 -150;
 	height: 50px;
 	text-align: center;
 	border: 1px solid black;
@@ -230,9 +290,53 @@ body {
 	margin-bottom: 20px;
 }
 
-.when_next_button span {
+.when_next_button span, .who_submit_button span {
 	display: block;
 	position: relative;
 	font-size: 20px;
 	margin-top: 13px;
+}
+
+.people_to_share {
+	display: block;
+	position: relative;
+	margin-top: 70px;
+	width: 260px;
+	padding: 10px 20px 10px 20px;
+	left: 50%;
+	margin-left: -150px;
+	border: solid transparent;
+	border-color: rgba(0,0,0,.2);
+	border-radius: 3px;
+	border-width: 1px 1px 2px 1px;
+	border-left: 1px solid red;
+	text-align: center;
+}
+
+.people_to_share > span {
+	display: block;
+	position: relative;
+	text-align: center;
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
+.groups_checklist {
+	display: block;
+	position: relative;
+	width: 220px;
+	padding: 10px 20px 10px 20px;
+	border: 1px solid rgba(0,0,0,.2);
+	border-radius: 3px;
+}
+
+.groups_checklist .group_checkbox {
+	text-align: left;
+}
+
+.groups_checklist .group_checkbox input {
+	display: block;
+	position: relative;
+	right: 0px;
+	float: right;
 }

@@ -66,8 +66,8 @@ function SetUpSQL() {
 	}
 }
 
-function DeletePing($user_id, $pingid) {
-	$query = mysql_query("DELETE * FROM pings WHERE owner_uid = $user_id AND $id = $pingid;");
+function DeletePing($pingid) {
+	$query = mysql_query("DELETE FROM pings WHERE id = $pingid;");
 	if (!$query) {
 		die("Query error");
 	}
@@ -95,7 +95,10 @@ function InsertPing($user_id, $type, $detail, $start, $duration, $flids) {
 
 function GetUnexpiredPings($user_id) {
 	$now = time();
-	$query = mysql_query("SELECT id FROM pings WHERE SUM(start + duration) > $now AND owner_uid = $user_uid;");
+	$query = mysql_query("SELECT id FROM pings WHERE start + duration > $now AND owner_uid = $user_id;");
+	if (!$query) {
+		die("Query error:".mysql_error());
+	}
 	while ($row = mysql_fetch_assoc($query)) {
     	$ret[] = $row['id'];
 	}
@@ -115,28 +118,33 @@ function GetAllFriendlyPings($user_id) {
 		//foreach:
 			//SELECT * FROM pings WHERE pingid = $result
 			//append $results as potential matching pings
-	//return results
+	//return result
 	$now = time();
+	$ret = array();
 	$query = mysql_query("SELECT flid FROM group_mems WHERE fid = $user_id;");
 	if (!$query) {
-		die("Query error");
+		die("Query error".mysql_error());
 	}
 	while ($row = mysql_fetch_assoc($query)) {
     	$flid = $row['flid'];
     	$subquery = mysql_query("SELECT pingid FROM ping_perm WHERE flid = $flid;");
     	if (!$subquery) {
-    		die("Query error");
+    		die("Query error".mysql_error());
     	}
 		while ($subrow = mysql_fetch_assoc($subquery)) {
 			$pingid = $subrow['pingid'];
-    		$subsubquery = mysql_query("SELECT id FROM pings WHERE pingid = $pingid AND SUM(start + duration) > $now;");
+    		$subsubquery = mysql_query("SELECT start, duration FROM pings WHERE id = $pingid");
     		if (!$subsubquery) {
     			die("Query error");
     		}
-    		$res[] = reset(mysql_result($subsubquery));
+    		$res = mysql_fetch_assoc($subsubquery);
+    		if (intval($res['start'])+intval($res['duration']) > $now) {
+    			$ret[] = $pingid;
+    		}
     	}
 	}
-	return $res;
+	$ret = array_unique($ret, SORT_NUMERIC);
+	return $ret;
 }
 
 function GetMatchingPings($user_id) {
@@ -154,7 +162,7 @@ function GetMatchingPings($user_id) {
 			$m = GetPingData($m);
 			$p = GetPingData($p);
 			$endm = $m['start'] + $m['duration'];
-			$endp = $['start'] + $p['duration'];
+			$endp = $p['start'] + $p['duration'];
 			if ($m['type'] == $p['type'] && ($endm - $p['start']) > 0 && ($endp - $m['start']) > 0) {
 				InsertPingMatch($m['id'], $p['id'], $m['owner_uid'], $p['owner_uid']);
 				InsertPingMatch($p['id'], $m['id'], $p['owner_uid'], $m['owner_uid']);
@@ -162,6 +170,7 @@ function GetMatchingPings($user_id) {
 			}
 		}
 	}
+	$ret = array_unique($ret, SORT_NUMERIC);
 	return $ret;
 }
 
