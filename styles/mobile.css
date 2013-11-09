@@ -52,9 +52,8 @@ body {
 .header .go_to_my_pings, .header .go_to_all_pings {
 	display: block;
 	position: absolute;
-	right: 10px;
+	right: 50px;
 	top: 15px;
-	text-decoration: underline;
 }
 
 .header .go_to_my_pings a, .header .go_to_all_pings a {
@@ -89,7 +88,6 @@ body {
 	border-color: rgba(0,0,0,.2);
 	border-radius: 3px;
 	border-width: 1px 1px 2px 1px;
-	border-left: 1px solid red;
 	color: black;
 }
 
@@ -172,10 +170,20 @@ body {
 	padding-left: 30px;
 	background: #2080b8;
 }
-
+.timeline_name {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 0px;
+	margin-left:0px;
+}
 .timeline_item .timeline_wants_to {
 	display: block;
 	position: relative;
+	padding-top:5px;
+}
+
+.timeline_item span {
+	padding-left:10px;
 }
 
 .timeline_item .timeline.time {
@@ -220,10 +228,35 @@ body {
 	border-color: rgba(0,0,0,.2);
 	border-radius: 3px;
 	border-width: 1px 1px 2px 1px;
-	border-left: 1px solid red;
+	text-align: center;
 }
 
 .add_details span {
+	display: block;
+	position: relative;
+	margin-top: 10px;
+	margin-bottom: 8px;
+}
+
+.settings_details {
+	display: block;
+	position: relative;
+	padding: 0 20px 10px 20px;
+	margin: 70px 0 10px 0;
+	width: 260px;
+	left: 50%;
+	margin-left: -150px;
+	font-size: 18px;
+	border: 1px solid black;
+	background-color: white;
+	border: solid transparent;
+	border-color: rgba(0,0,0,.2);
+	border-radius: 3px;
+	border-width: 1px 1px 2px 1px;
+	text-align: center;
+}
+
+.settings_details span {
 	display: block;
 	position: relative;
 	margin-top: 10px;
@@ -246,7 +279,6 @@ body {
 	border-color: rgba(0,0,0,.2);
 	border-radius: 3px;
 	border-width: 1px 1px 2px 1px;
-	border-left: 1px solid red;
 	text-align: center;
 }
 
@@ -298,7 +330,7 @@ body {
 	margin: 18px 0 0 140px;
 }
 
-.when_next_button, .who_submit_button, .go_home_button {
+.when_next_button, .who_submit_button, .go_home_button, .submit_button {
 	display: block;
 	position: relative;
 	width: 300px;
@@ -324,6 +356,11 @@ body {
 	margin-top: 13px;
 }
 
+.go_home_button {
+	width: 280px;
+	margin: 20px 0 0 -140px;
+}
+
 .people_to_share {
 	display: block;
 	position: relative;
@@ -336,7 +373,6 @@ body {
 	border-color: rgba(0,0,0,.2);
 	border-radius: 3px;
 	border-width: 1px 1px 2px 1px;
-	border-left: 1px solid red;
 	text-align: center;
 }
 
@@ -389,4 +425,31 @@ body {
 	text-align: center;
 	margin-top: 100px;
 	margin-bottom: 60px;
+}
+
+#login_with_fb  a  img {
+	display: block;
+	position: relative;
+	width: 350px;
+	left: 50%;
+	margin-left: -175px;
+}
+
+.gear_button img {
+	display: block;
+	position: absolute;
+	width: 36px;
+	right: 6px;
+	top: 8px;
+}
+
+.orange_dot {
+	position:relative;
+	left:-252px;
+	top:45px;
+}
+
+.settings_button {
+	width: 250px;
+	margin: 10px 10 10 -125px;
 }

@@ -32,7 +32,13 @@ if($user_id) {
 				</div>
 			</a>
 			<div class = "go_to_my_pings">
-				<span><a href = "/my_pings.php">My pings</a></span>
+				<span><a href = "/my_pings.php">my pings</a></span>
+			</div> 
+			
+			<div class = "gear_button">
+				<a href = "settings.php">
+					<img src = "../img/whitebutton1.png" />
+				</a>
 			</div>
 		</div>
 		
@@ -69,8 +75,8 @@ if($user_id) {
 			
 		</div>
 		
-		<div class = "who_submit_button">
-				<span><input type="submit" value="Submit" /></span>
+		<div class = "who_submit_button" onclick="document.forms[0].submit();">
+				<span>Ping!</span>
 		</div>
 		</form>
 	</body>

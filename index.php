@@ -27,9 +27,21 @@ $user_id = $facebook->getUser();
 					<span>Pinguin</span>
 				</div>
 			</a>
+			<?PHP
+			if($user_id) { ?>
 			<div class = "go_to_my_pings">
-				<span><a href = "/my_pings.php">My pings</a></span>
+				<span><a href = "/my_pings.php">my pings</a></span>
+			</div> 
+			
+			<div class = "gear_button">
+				<a href = "settings.php">
+					<img src = "../img/whitebutton1.png" />
+				</a>
 			</div>
+			<?PHP
+			
+		}
+		?>
 		</div>
 <?PHP
 SetUpSQL();
@@ -46,52 +58,64 @@ if($user_id) {
 				<a href="time_entry.php?type=0"><div class = "type_button" id = "food_button">
 					<span>Food</span>
 				</div></a>
-				<a href="time_entry.php?type=0"><div class = "type_button" id = "study_button">
+				<a href="time_entry.php?type=1"><div class = "type_button" id = "study_button">
 					<span>Study</span>
 				</div></a>
-				<a href="time_entry.php?type=0"><div class = "type_button" id = "event_button">
+				<a href="time_entry.php?type=2"><div class = "type_button" id = "event_button">
 					<span>Event</span>
 				</div></a>
-				<a href="time_entry.php?type=0"><div class = "type_button" id = "active_button">
+				<a href="time_entry.php?type=3"><div class = "type_button" id = "active_button">
 					<span>Active</span>
 				</div></a>	
 			</div>
 		</div>
 		
 		<div class = "timeline">
-			<div class = "divider_matched">
+<?PHP
+$matches = GetMatchingPings($user_id);
+if (count($mateches) > 0) {
+	?>
+				<div class = "divider_matched">
 				<span>Pingbacks</span>
 				<hr>
 			</div>
-<?PHP
-$matches = GetMatchingPings($user_id);
+			<?
+}
 foreach ($matches as $match) {
 	$ping = GetPingData($match);
 ?>
+
 			<div class = "timeline_item">
+<div class = "orange_dot">
+	<img src = "../img/ping_icon.png" />
+</div>
 				<span class = "timeline_name"><?=GetName($ping['owner_uid'])?></span>
 				<span class = "timeline_wants_to"><?=WantsToCaption($ping)?></span>
-				<span class = "timeline_time"><?=TimeCaption($ping)?></span>
 				<span class = "timeline_details"><?=(strlen($ping['detail']) > 0 ? "\"".$ping['detail']."\"" : "")?></span>
+				<span class = "timeline_time"><?=TimeCaption($ping)?></span>
 			</div>
 <?PHP
 }
-?>
+$feed = GetAllFriendlyPings($user_id);
+if (count($feed) > 0) { ?>
 			<div class = "divider_all_pings">
 				<span>All pings</span>
 				<hr>
 			</div>
 <?PHP
-$feed = GetAllFriendlyPings($user_id);
+}
 foreach ($feed as $pingid) {
 	$ping = GetPingData($pingid);
 ?>
 			<div class = "timeline_item">
+<div class = "orange_dot">
+	<img src = "../img/ping_icon.png" />
+</div>
 				<span class = "timeline_name"><?=GetName($ping['owner_uid'])?></span>
 				<span class = "timeline_wants_to"><?=WantsToCaption($ping)?></span>
-				<span class = "timeline_time"><?=TimeCaption($ping)?></span>
 				<span class = "timeline_details"><?=(strlen($ping['detail']) > 0 ? "\"".$ping['detail']."\"" : "")?></span>
-			</div>	
+				<span class = "timeline_time"><?=TimeCaption($ping)?></span>
+			</div>
 <?PHP
 }
 ?>

@@ -31,12 +31,18 @@ if($user_id) {
 				</div>
 			</a>
 			<div class = "go_to_my_pings">
-				<span><a href = "/my_pings.php">My pings</a></span>
+				<span><a href = "/my_pings.php">my pings</a></span>
+			</div> 
+			
+			<div class = "gear_button">
+				<a href = "settings.php">
+					<img src = "../img/whitebutton1.png" />
+				</a>
 			</div>
 		</div>
     <form action="people_entry.php?type=<?=$_GET['type']?>" method="post">
 		<div class = "add_details">
-			<span>Do you want to add any details?</span>
+			<span>Any important details?</span>
 			<input type = "text" name="details" class = "details_question_input" line = "2"/>
 		</div>
 		
@@ -53,7 +59,17 @@ if($user_id) {
 				<input type="date" name="sdate" class = "start_date_entry"/>
 				<input type="time" name="stime" class = "start_time_entry"/>
 			</div>
-			
+			<?PHP
+			if (intval($_GET['type']) == 2) {
+			?>
+			<div class = "when_duration">
+				<span>Duration</span>
+				<select name="duration" class = "duration_entry">
+					<option value = "0">0 hours (event)</option>
+				</select>
+			</div>
+			<?PHP
+		} else { ?>
 			<div class = "when_duration">
 				<span>Duration</span>
 				<select name="duration" class = "duration_entry">
@@ -68,11 +84,12 @@ if($user_id) {
 					<option value = "604800">1 week</option>
 				</select>
 			</div>
+			<?PHP } ?>
 			
 		</div>
 		
-		<div class = "when_next_button">
-				<span><input type="submit" value="Next" /></span>
+		<div class = "when_next_button" onclick="document.forms[0].submit();">
+				<span>Next</span>
 		</div>
 	</form>
 

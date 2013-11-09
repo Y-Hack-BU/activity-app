@@ -7,10 +7,11 @@ a {
 }
 
 body {
+	width: 100%;
 	margin: 0;
 	background: #f4f4f4;
 	font-family: 'Open Sans';
-	padding-top: 70px;
+	padding-top: 0px;
 }
 
 .header {
@@ -26,10 +27,10 @@ body {
 .header_logo {
 	display: block;
 	position: absolute;
-	left: 5px;
+	left: 0px;
 	width: 140px;
 	margin-left: 0px;
-	margin-top: 7px;
+	margin-top: 5px;
 	color: white;
 	font-size: 27px;
 }
@@ -59,29 +60,13 @@ body {
 	color: white;
 }
 
-.choose_type {
-	display: block;
-	position: relative;
-	margin-top: 15px;
-	height: 200px;
-	width: 500px;
-	left: 50%;
-	margin-left: -250px;
-	border: 1px solid black;
-	background-color: white;
-	border: solid transparent;
-	border-color: rgba(0,0,0,.2);
-	border-radius: 3px;
-	border-width: 1px 1px 2px 1px;
-}
-
 #main_buttons {
-	height: 100px;
 	display: block;
 	position: relative;
-	width: 400px;
-	left: 50%;
-	margin-left: -200px;
+	width: 100%;
+	height: 210px;
+	left: 0;
+	margin: 0;
 }
 
 #main_question {
@@ -89,58 +74,81 @@ body {
 	position: relative;
 	text-align: center;
 	font-size: 19px;
-	margin: 25px 0 20px 0;
+	margin: 15px 0 15px 0;
 }
 
 .type_button {
 	display: block;
-	position: relative;
-	height: 90px;
-	width: 90px;
-	float: left;
+	position: absolute;
+	height: 50px;
+	width: 130px;
+	text-align: center;
 	background-color: white;
 	border: solid transparent;
 	border-color: rgba(0,0,0,.2);
 	border-radius: 3px;
 	border-width: 1px 1px 2px 1px;
-	text-align: center;
 	color: black;
 }
 
-.type_button span {
-	display: block;
-	margin-top: 35px;
-}
-
-#food_button, #study_button, #event_button {
-	margin-right: 10px;
-}
-
-.timeline {
+.choose_type {
 	display: block;
 	position: relative;
-	margin: 0 0 50px 0;
-}
-
-.my_pings_timeline {
-	display: block;
-	position: relative;
-	margin: 0 0 50px 0;
-}
-
-.timeline_item {
-	display: block;
-	position: relative;
-	width: 420px;
-	padding: 0px 40px 0px 40px;
+	margin-top: 65px;
+	height: 200px;
+	width: 300px;
 	left: 50%;
-	margin: 15px 0 0 -250px;
+	margin-left: -150px;
 	background: white;
 	border: solid transparent;
 	border-color: rgba(0,0,0,.2);
 	border-radius: 3px;
 	border-width: 1px 1px 2px 1px;
-	padding-bottom:5px;
+}
+
+.type_button span {
+	display: block;
+	margin-top: 15px;
+}
+
+#food_button, #event_button {
+	left: 50%;
+	margin-left: -135px;
+}
+
+#study_button, #active_button {
+	left: 50%;
+	margin-left: 5px;
+}
+
+#event_button, #active_button {
+	top: 60px;
+}
+
+.timeline {
+	display: block;
+	position: relative;
+	margin: 0 0 20px 0;
+}
+
+.my_pings_timeline {
+	display: block;
+	position: relative;
+	margin: 70px 0 20px 0;
+}
+
+.timeline_item {
+	display: block;
+	position: relative;
+	width: 260px;
+	padding: 0px 20px 0px 20px;
+	left: 50%;
+	margin: 15px 0 0 -150px;
+	background: white;
+	border: solid transparent;
+	border-color: rgba(0,0,0,.2);
+	border-radius: 3px;
+	border-width: 1px 1px 2px 1px;
 }
 
 .timeline_item img {
@@ -153,23 +161,15 @@ body {
 	top: 4px;
 }
 
-.timeline_item span {
-	line-height: 18px;
-	font-size:12px;
-}
-
 .timeline_item .timeline_name {
 	display: block;
 	position: relative;
 	color: white;
-	width: 460px;
-	margin-left: -40px;
-	padding-left: 40px;
+	width: 285px;
+	margin-left: 0px;
+	padding-left: 15px;
 	background: #2080b8;
-	font-size: 15px;
-	font-weight: bold;
 }
-
 .timeline_name {
 	padding-top: 3px;
 	padding-bottom: 3px;
@@ -194,29 +194,14 @@ body {
 	font-style: italic;
 }
 
-.divider_matched, .divider_all_pings {
-	display: block;
-	position: relative;
-	width: 500px;
-	left: 50%;
-	margin: 15px 0 -10px -250px;
-}
-
-.divider_matched span, .divider_all_pings span {
-	display: block;
-	position: relative;
-	height: 12px;
-	font-size: 15px;
-}
-
 #login_pinguin {
 	display: block;
 	position: relative;
 	left: 50%;
-	margin-left: -100px;
+	margin-left: -80px;
 	margin-top: 70px;
-	width: 200px;
-	height: 250px;
+	width: 160px;
+	height: 200px;
 }
 
 #login_facebook {
@@ -227,11 +212,11 @@ body {
 .add_details {
 	display: block;
 	position: relative;
-	padding: 0 40px 10px 40px;
-	margin: 0 0 10px 0;
-	width: 420px;
+	padding: 0 20px 10px 20px;
+	margin: 70px 0 10px 0;
+	width: 260px;
 	left: 50%;
-	margin-left: -250px;
+	margin-left: -150px;
 	font-size: 18px;
 	border: 1px solid black;
 	background-color: white;
@@ -239,30 +224,6 @@ body {
 	border-color: rgba(0,0,0,.2);
 	border-radius: 3px;
 	border-width: 1px 1px 2px 1px;
-}
-
-.settings_details {
-	display: block;
-	position: relative;
-	padding: 0 40px 10px 40px;
-	margin: 0 0 10px 0;
-	width: 420px;
-	left: 50%;
-	margin-left: -250px;
-	font-size: 18px;
-	border: 1px solid black;
-	background-color: white;
-	border: solid transparent;
-	border-color: rgba(0,0,0,.2);
-	border-radius: 3px;
-	border-width: 1px 1px 2px 1px;
-}
-
-.settings_details span {
-	display: block;
-	position: relative;
-	margin-top: 10px;
-	margin-bottom: 8px;
 	text-align: center;
 }
 
@@ -271,7 +232,6 @@ body {
 	position: relative;
 	margin-top: 10px;
 	margin-bottom: 8px;
-	text-align: center;
 }
 
 .details_question_input {
@@ -281,10 +241,10 @@ body {
 .when {
 	display: block;
 	position: relative;
-	padding: 0 40px 0 40px;
-	width: 420px;
+	padding: 0 20px 0 20px;
+	width: 260px;
 	left: 50%;
-	margin-left: -250px;
+	margin-left: -150px;
 	background-color: white;
 	border: solid transparent;
 	border-color: rgba(0,0,0,.2);
@@ -312,7 +272,6 @@ body {
 	padding-bottom: 10px;
 	border: 1px solid rgba(0,0,0,.2);
 	border-radius: 3px;
-	padding-top:8px;
 }
 
 .when .when_start_time span {
@@ -333,21 +292,21 @@ body {
 	position: absolute;
 	text-align: left;
 	font-size: 19px;
-	margin: 14px 0 0 120px;
+	margin: 14px 0 0 40px;
 }
 
 .when .when_duration .duration_entry {
 	display: block;
 	position: relative;
-	margin: 18px 0 0 220px;
+	margin: 18px 0 0 140px;
 }
 
-.when_next_button, .who_submit_button, .settings_button {
+.when_next_button, .who_submit_button, .go_home_button {
 	display: block;
 	position: relative;
-	width: 500px;
+	width: 300px;
 	left: 50%;
-	margin: 10px 0 0 -250;
+	margin: 10px 0 0 -150;
 	height: 50px;
 	text-align: center;
 	border: 1px solid black;
@@ -359,28 +318,23 @@ body {
 	border-width: 1px 1px 2px 1px;
 	text-align: center;
 	margin-bottom: 20px;
-	cursor: pointer;
 }
 
-.settings_button {
-	width: 450px;
-	margin: 10px 10 10 -225px;
-}
 .when_next_button span, .who_submit_button span, .go_home_button span {
 	display: block;
 	position: relative;
 	font-size: 20px;
 	margin-top: 13px;
-	cursor: pointer;
 }
 
 .people_to_share {
 	display: block;
 	position: relative;
-	width: 420px;
-	padding: 10px 40px 10px 40px;
+	margin-top: 70px;
+	width: 260px;
+	padding: 10px 20px 10px 20px;
 	left: 50%;
-	margin-left: -250px;
+	margin-left: -150px;
 	border: solid transparent;
 	border-color: rgba(0,0,0,.2);
 	border-radius: 3px;
@@ -399,7 +353,7 @@ body {
 .groups_checklist {
 	display: block;
 	position: relative;
-	width: 380px;
+	width: 220px;
 	padding: 10px 20px 10px 20px;
 	border: 1px solid rgba(0,0,0,.2);
 	border-radius: 3px;
@@ -416,38 +370,35 @@ body {
 	float: right;
 }
 
+.divider_matched, .divider_all_pings {
+	display: block;
+	position: relative;
+	width: 300px;
+	left: 50%;
+	margin: 15px 0 -10px -150px;
+}
+
+.divider_matched span, .divider_all_pings span {
+	display: block;
+	position: relative;
+	height: 12px;
+	font-size: 15px;
+}
+
 .success {
 	display: block;
 	position: relative;
 	text-align: center;
 	margin-top: 100px;
-}
-
-.go_home_button {
-	display: block;
-	position: relative;
-	width: 400px;
-	left: 50%;
-	margin: 50px 0 0 -200px;
-	text-align: center;
-	height: 50px;
-	border: 1px solid black;
-	background: #2080b8;
-	color: white;
-	border: solid transparent;
-	border-color: rgba(0,0,0,.2);
-	border-radius: 3px;
-	border-width: 1px 1px 2px 1px;
-	text-align: center;
-	margin-bottom: 20px;
+	margin-bottom: 60px;
 }
 
 #login_with_fb  a  img {
 	display: block;
 	position: relative;
-	width: 500px;
+	width: 350px;
 	left: 50%;
-	margin-left: -250px;
+	margin-left: -175px;
 }
 
 .gear_button img {

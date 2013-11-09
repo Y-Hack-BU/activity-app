@@ -23,16 +23,22 @@ if($user_id) {
 	</head>
 	<body>
 		<!-- Header -->
+
 		<div class = "header">
-			<a href = "index.html">
+			<a href = "index.php">
 				<div class = "header_logo">
 					<img src = "../img/pinguin_logo.png" />
 					<span>Pinguin</span>
 				</div>
 			</a>
+			<div class = "go_to_my_pings">
+				<span><a href = "/my_pings.php">my pings</a></span>
+			</div> 
 			
-			<div class = "go_to_all_pings">
-				<span><a href = "/index.html">All pings</a></span>
+			<div class = "gear_button">
+				<a href = "settings.php">
+					<img src = "../img/whitebutton1.png" />
+				</a>
 			</div>
 		</div>
 		
@@ -40,18 +46,28 @@ if($user_id) {
 			<div class = "divider_all_pings">
 				<span>My Pings</span>
 				<hr>
+				<?PHP
+					$mypings = GetUnexpiredPings($user_id);
+					if (count($mypings) == 0) {
+						?>
+		<br /><span style="text-align:center">You don't have any pings right now</span>
+		<?PHP
+	}
+				?>
 			</div>
 <?php
-	$mypings = GetUnexpiredPings($user_id);
 	foreach ($mypings as $ping) {
 		$ping = GetPingData($ping);
 ?>
 			<div class = "timeline_item">
 				<a href="delete.php?pid=<?=$ping['id']?>"><img src = "../img/x-it.png" /></a>
+<div class = "orange_dot">
+	<img src = "../img/ping_icon.png" />
+</div>
 				<span class = "timeline_name"><?=GetName($ping['owner_uid'])?></span>
 				<span class = "timeline_wants_to"><?=WantsToCaption($ping)?></span>
+				<span class = "timeline_details"><?=(strlen($ping['detail']) > 0 ? "\"".$ping['detail']."\"" : ". . .")?></span>
 				<span class = "timeline_time"><?=TimeCaption($ping)?></span>
-				<span class = "timeline_details"><?=(strlen($ping['detail']) > 0 ? "\"".$ping['detail']."\"" : "")?></span>
 			</div>	
 			<?php
 		}

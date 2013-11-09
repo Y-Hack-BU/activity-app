@@ -68,8 +68,6 @@ function RegisterIfNotExists($facebook) {
 		$query = mysql_query("INSERT INTO users (fb_uid, fname, lname, txten, cellnum) VALUES (".$user_id.", '".$user_profile['first_name']."', '".$user_profile['last_name']."', 0, 0);");
 		if (!$query) {
 			die("Query error");
-		} else {
-			print "User registered!!";
 		}
 	}
 }
@@ -212,6 +210,25 @@ function GetName($user_id) {
 	}
 	$res = mysql_fetch_assoc($query);
 	return $res['fname']." ".$res['lname'];
+}
+
+function GetNotificationSettings($user_id) {
+	$query = mysql_query("SELECT txten, cellnum FROM users WHERE fb_uid = $user_id;");
+	if (!$query) {
+		die("Query error");
+	}
+	$res = mysql_fetch_assoc($query);
+	return $res;
+}
+
+function UpdateNotificationSettings($user_id, $txten, $cellnum) {
+	$txten = ($txten ? 1 : 0);
+	$cellnum = intval($cellnum);
+	$query = mysql_query("UPDATE users SET txten = $txten, cellnum = $cellnum WHERE fb_uid = $user_id;");
+	if (!$query) {
+		die("Query error");
+	}
+	return true;
 }
 
 function WantsToCaption($pingdata) {
