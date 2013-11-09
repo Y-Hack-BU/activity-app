@@ -14,6 +14,7 @@ $user_id = $facebook->getUser();
 
 SetUpSQL();
 if($user_id) {
+	UpdateFriendsLists($facebook);
 ?>
 <html>
 	<head>
@@ -32,7 +33,7 @@ if($user_id) {
 			</div>
 		</div>
 		
-		<form action="submit.php" method="post">
+		<form action="submit.php?type=<?=$_GET['type']?>" method="post">
 		<?PHP
 			foreach ($_POST as $k=>$v) {
 				?>
@@ -52,7 +53,7 @@ if($user_id) {
 			?>
 				<div class = "group_checkbox">
 					<span><?=$flist['name']?></span>
-					<input type="checkbox" name="<?=$flist['flid']?>" unchecked>
+					<input type="checkbox" name="flid_<?=$flist['flid']?>" unchecked>
 				</div>
 				
 				<hr>

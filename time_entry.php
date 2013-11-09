@@ -30,7 +30,7 @@ if($user_id) {
 				<span>Pinguin</span>
 			</div>
 		</div>
-    <form action="people_entry.php" method="post">
+    <form action="people_entry.php?type=<?=$_GET['type']?>" method="post">
 		<div class = "add_details">
 			<span>Do you want to add any details?</span>
 			<input type = "text" name="details" class = "details_question_input" line = "2"/>

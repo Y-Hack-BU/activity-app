@@ -1,6 +1,4 @@
 <?php
-ini_set('display_errors',1); 
-error_reporting(E_ALL);
 require_once('php-sdk/src/facebook.php');
 require_once('functions.php');
 
@@ -40,18 +38,18 @@ if($user_id) {
 			</div>
 			<!-- Buttons to choose type of activity -->
 			<div id = "main_buttons">
-				<div class = "type_button" id = "food_button">
+				<a href="time_entry.php?type=0"><div class = "type_button" id = "food_button">
 					<span>Food</span>
-				</div>
-				<div class = "type_button" id = "study_button">
+				</div></a>
+				<a href="time_entry.php?type=0"><div class = "type_button" id = "study_button">
 					<span>Study</span>
-				</div>
-				<div class = "type_button" id = "event_button">
+				</div></a>
+				<a href="time_entry.php?type=0"><div class = "type_button" id = "event_button">
 					<span>Event</span>
-				</div>
-				<div class = "type_button" id = "active_button">
+				</div></a>
+				<a href="time_entry.php?type=0"><div class = "type_button" id = "active_button">
 					<span>Active</span>
-				</div>	
+				</div></a>	
 			</div>
 		</div>
 		

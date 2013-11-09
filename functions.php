@@ -1,5 +1,23 @@
 <?PHP
 require_once("config.php");
+function GetFriendsLists($facebook) {
+	$ret = array();
+	try {
+		$params = array(
+			'method' => 'fql.query',
+			'query' => "SELECT name,flid FROM friendlist WHERE owner=me()",
+			);
+
+		$result = $facebook->api($params);
+		foreach ($result as $r) {
+			$ret[] = $r;
+		}
+	} catch(FacebookApiException $e) {
+		print($e->getMessage());
+	}
+	return $ret;
+}
+
 function UpdateFriendsLists($facebook) {
 	$user_id = $facebook->getUser();
 	try {
@@ -43,6 +61,7 @@ function UpdateFriendsLists($facebook) {
 
 function RegisterIfNotExists($facebook) {
 	$user_id = $facebook->getUser();
+	$user_profile = $facebook->api('/me','GET');
 	$query = mysql_query("SELECT id FROM users WHERE fb_uid = ".$user_id);
 	if (mysql_num_rows($query) < 1) {
       //Need to register user
@@ -157,16 +176,19 @@ function GetMatchingPings($user_id) {
 	//return return values
 	$friendly = GetAllFriendlyPings($user_id);
 	$mine = GetUnexpiredPings($user_id);
-	foreach ($mine as $m) {
-		foreach ($friendly as $p) {
-			$m = GetPingData($m);
-			$p = GetPingData($p);
-			$endm = $m['start'] + $m['duration'];
-			$endp = $p['start'] + $p['duration'];
-			if ($m['type'] == $p['type'] && ($endm - $p['start']) > 0 && ($endp - $m['start']) > 0) {
-				InsertPingMatch($m['id'], $p['id'], $m['owner_uid'], $p['owner_uid']);
-				InsertPingMatch($p['id'], $m['id'], $p['owner_uid'], $m['owner_uid']);
-				$ret[] = $p['id'];
+	foreach ($mine as $m2) {
+		foreach ($friendly as $p2) {
+			$m3 = GetPingData($m2);
+			$p3 = GetPingData($p2);
+			$endm = intval($m3['start']) + intval($m3['duration']);
+			$endp = intval($p3['start']) + intval($p3['duration']);
+			//print_r($m3);
+			//print("test:".$m3['start']."<br>");
+			//print($endm.":".$endp.":".intval($m3['start']).":".intval($p['start'])."<br /><br />");
+			if ($m3['type'] == $p3['type'] && ($endm - intval($p3['start'])) > 0 && ($endp - intval($m3['start'])) > 0) {
+				InsertPingMatch($m3['id'], $p3['id'], $m3['owner_uid'], $p3['owner_uid']);
+				InsertPingMatch($p3['id'], $m3['id'], $p3['owner_uid'], $m3['owner_uid']);
+				$ret[] = $p3['id'];
 			}
 		}
 	}
@@ -208,7 +230,7 @@ function TimeCaption($pingdata) {
 	if (intval($pingdata['start']) < time()) {
 		return "@ Now";
 	} else {
-		return date("D m.d.y", intval($pingdata['start']));
+		return "@ ".date("D m.d.y H", intval($pingdata['start']))." (".$pingdata['duration'].")";
 	}
 }
 ?>

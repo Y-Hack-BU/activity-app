@@ -29,7 +29,16 @@ if($user_id) {
   //Register user if not registered
   RegisterIfNotExists($facebook);
   //Add friends, update if already exist
-  UpdateFriendsList($facebook);
+  //UpdateFriendsLists($facebook);
+  InsertPing($user_id, 4, "yo what up", time(), 3600, Array(42069));
+  $a=GetUnexpiredPings($user_id);
+  foreach($a as $pid) {
+    //print_r(GetPingData($pid));
+  }
+  DeletePing(4);
+  $a=GetMatchingPings($user_id);
+  print_r($a);
+
 } else {
   $login_url = $facebook->getLoginUrl(array("scope" => "read_friendlists"));
   echo 'Please <a href="' . $login_url . '">login.</a>';

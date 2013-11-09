@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="styles/style.css">
 		<link media="handheld, only screen and (max-width: 480px), only screen and (max-device-width: 480px)" 
 		href="styles/mobile.css" type="text/css" rel="stylesheet" />
@@ -8,10 +9,12 @@
 	<body>
 		<!-- Header -->
 		<div class = "header">
-			<div class = "header_logo">
-				<img src = "../img/pinguin_logo.png" />
-				<span>Pinguin</span>
-			</div>
+			<a href = "index.html">
+				<div class = "header_logo">
+					<img src = "../img/pinguin_logo.png" />
+					<span>Pinguin</span>
+				</div>
+			</a>
 		</div>
 		
 		<div class = "add_details">
@@ -21,7 +24,7 @@
 		
 		<div class = "when">
 			
-			<span>When do you want to do this?</span>
+			<span><b>When do you want to do this?</b></span>
 			
 			<div class = "now_or_later">
 				<input type="radio" name="group1" value="Now"> Now
@@ -29,20 +32,33 @@
 			</div>
 			
 			<div class = "when_start_time">
+				<span>Starting date and time</span>
 				<input type="date" class = "start_date_entry"/>
 				<input type="time" class = "start_time_entry"/>
 			</div>
 			
-			<div class = "when_end_time">
-				<input type="date" class = "end_date_entry"/>
-				<input type="time" class = "end_time_entry"/>
+			<div class = "when_duration">
+				<span>Duration</span>
+				<select class = "duration_entry">
+					<option value = "1 hour">1 hour</option>
+					<option value = "2 hours">2 hours</option>
+					<option value = "3 hours">3 hours</option>
+					<option value = "5 hours">5 hours</option>
+					<option value = "10 hours">10 hours</option>
+					<option value = "1 day">1 day</option>
+					<option value = "2 days">2 days</option>
+					<option value = "4 days">4 days</option>
+					<option value = "1 week">1 week</option>
+				</select>
 			</div>
 			
 		</div>
 		
-		<div class = "when_next_button">
-				<span>Next</span>
-		</div>
+		<a href = "people_entry.html">
+			<div class = "when_next_button">
+					<span>Next</span>
+			</div>
+		</a>
 		
 	</body>
 </html>
