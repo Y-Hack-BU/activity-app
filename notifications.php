@@ -1,6 +1,6 @@
 <?PHP
 ini_set('display_errors',1); 
-error_reporting(E_ALL);
+error_reporting(E_ERROR);
 require_once("config.php");
 require_once("functions.php");
 // initialize Twilio account
@@ -26,7 +26,6 @@ function GetAllPingsToNotify() {
 	foreach ($uids as $uid) {
 		print($uid);
 		$pings = GetMatchingPings($uid);
-print_r($pings);
 		// look in ping_match
 			// for each pings as ping:
 				// Select ping = pid2 and uid1 = uid (current user id)
@@ -56,12 +55,7 @@ print_r($pings);
 				}
 				$res = mysql_fetch_assoc($query);
 				$number = $res['cellnum'];
-				$fname = $res['fname'];
-				$lname = $res['lname'];
 				$txten = $res['txten'];
-
-				print_r($res);
-
 
 				if ($txten) { // if user has enabled texting
 
@@ -77,8 +71,19 @@ print_r($pings);
 					//date("m.d.y h:m", $time)
 					$duration = $res['duration'];
 
+					$owner_uid = $res['owner_uid'];
+
+					// get names of sender
+					$query = mysql_query("SELECT fname, lname, cellnum FROM users WHERE fb_uid = $owner_uid;");
+					if(!$query){
+						die("Query Error!");
+					}
+					$res = mysql_fetch_assoc($query);
+					$fname = $res['fname'];
+					$lname = $res['lname'];
+
 					// update txt
-					$query = mysql_query("UPDATE ping_match SET txt1 = 1 WHERE pid2 = $ping and uid1 = $uid;");	
+					$query = mysql_query("UPDATE ping_match SET txt1 = 0 WHERE pid2 = $ping and uid1 = $uid;");	
 					if(!$query){
 						die("Query Error!");
 					}
@@ -110,7 +115,7 @@ function SendNotification($res, $number, $fname, $lname, $type, $detail, $start,
 		$number, // User's number
 
 		// message:
-		"\n $first $last\n".WantsToCaption($res)."\n\"$detail\"\n".TimeCaption($res)
+		"\n\n$fname $lname\n".WantsToCaption($res)."\n\"$detail\"\n".TimeCaption($res)
 
 	);
 }
