@@ -157,6 +157,7 @@ function GetMatchingPings($user_id) {
 			$endp = $['start'] + $p['duration'];
 			if ($m['type'] == $p['type'] && ($endm - $p['start']) > 0 && ($endp - $m['start']) > 0) {
 				InsertPingMatch($m['id'], $p['id'], $m['owner_uid'], $p['owner_uid']);
+				InsertPingMatch($p['id'], $m['id'], $p['owner_uid'], $m['owner_uid']);
 				$ret[] = $p['id'];
 			}
 		}
@@ -165,8 +166,8 @@ function GetMatchingPings($user_id) {
 }
 
 function InsertPingMatch($pid1, $pid2, $uid1, $uid2) {
-	$now = time();
-	$query = mysql_query("INSERT INTO ping_match (pid1, pid2, uid1, uid2, txt1, txt2, timestamp) VALUES ($pid1, $pid2, $uid1, $uid2, 0, 0, $now);")
+	$now = time();			
+	$query = mysql_query("INSERT INTO `ping_match` (pid1, pid2, uid1, uid2, txt1, txt2, timestamp) SELECT $pid1, $pid2, $uid1, $uid2, 0, 0, $now FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM `ping_match` WHERE pid1=$pid1 AND pid2=$pid2 AND uid1=$uid1 AND uid2=$uid2) LIMIT 1;");
 	if (!$query) {
 		die("Query error");
 	}
