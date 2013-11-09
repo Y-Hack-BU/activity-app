@@ -80,7 +80,7 @@ function GetMyPendingPings($user_id) {
 
 function InsertPing($user_id, $type, $detail, $start, $duration, $flids) {
 	$now = time();
-	$query = mysql_query("INSERT INTO pings (owner_uid, type, detail, start, duration, time) VALUES ($user_id, $type, '".mysql_real_escape_string($detail)."', $start, $duration, $now);");
+	$query = mysql_query("INSERT INTO pings (owner_uid, type, detail, start, duration, timestamp) VALUES ($user_id, $type, '".mysql_real_escape_string($detail)."', $start, $duration, $now);");
 	if (!$query) {
 		die("Query error");
 	}
@@ -95,7 +95,7 @@ function InsertPing($user_id, $type, $detail, $start, $duration, $flids) {
 
 function GetUnexpiredPings($user_id) {
 	$now = time();
-	$query = mysql_query("SELECT id FROM pings WHERE SUM(start + duration) > $now AND owner_uid = $user_uid");
+	$query = mysql_query("SELECT id FROM pings WHERE SUM(start + duration) > $now AND owner_uid = $user_uid;");
 	while ($row = mysql_fetch_assoc($query)) {
     	$ret[] = $row['id'];
 	}
@@ -112,9 +112,31 @@ function GetAllFriendlyPings($user_id) {
 	//SELECT flid FROM group_mems WHERE fid = $user_id
 	//foreach flid as $result:
 		//SELECT pingid FROM ping_perm WHERE flid = $result
-		//SELECT * FROM pings WHERE pingid = $result
-		//append $results as potential matching pings
+		//foreach:
+			//SELECT * FROM pings WHERE pingid = $result
+			//append $results as potential matching pings
 	//return results
+	$now = time();
+	$query = mysql_query("SELECT flid FROM group_mems WHERE fid = $user_id;");
+	if (!$query) {
+		die("Query error");
+	}
+	while ($row = mysql_fetch_assoc($query)) {
+    	$flid = $row['flid'];
+    	$subquery = mysql_query("SELECT pingid FROM ping_perm WHERE flid = $flid;");
+    	if (!$subquery) {
+    		die("Query error");
+    	}
+		while ($subrow = mysql_fetch_assoc($subquery)) {
+			$pingid = $subrow['pingid'];
+    		$subsubquery = mysql_query("SELECT id FROM pings WHERE pingid = $pingid AND SUM(start + duration) > $now;");
+    		if (!$subsubquery) {
+    			die("Query error");
+    		}
+    		$res[] = reset(mysql_result($subsubquery));
+    	}
+	}
+	return $res;
 }
 
 function GetMatchingPings($user_id) {
@@ -123,10 +145,31 @@ function GetMatchingPings($user_id) {
 	//foreach result:
 		//foreach potential ping:
 			//if types are equal and times overlap, add match to database and add to return values
+			//times overlap if: NOT(end of at least one of the time frames comes before the other)
 	//return return values
+	$friendly = GetAllFriendlyPings($user_id);
+	$mine = GetUnexpiredPings($user_id);
+	foreach ($mine as $m) {
+		foreach ($friendly as $p) {
+			$m = GetPingData($m);
+			$p = GetPingData($p);
+			$endm = $m['start'] + $m['duration'];
+			$endp = $['start'] + $p['duration'];
+			if ($m['type'] == $p['type'] && ($endm - $p['start']) > 0 && ($endp - $m['start']) > 0) {
+				InsertPingMatch($m['id'], $p['id'], $m['owner_uid'], $p['owner_uid']);
+				$ret[] = $p['id'];
+			}
+		}
+	}
+	return $ret;
 }
 
 function InsertPingMatch($pid1, $pid2, $uid1, $uid2) {
-
+	$now = time();
+	$query = mysql_query("INSERT INTO ping_match (pid1, pid2, uid1, uid2, txt1, txt2, timestamp) VALUES ($pid1, $pid2, $uid1, $uid2, 0, 0, $now);")
+	if (!$query) {
+		die("Query error");
+	}
+	return true;
 }
 ?>
