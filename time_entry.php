@@ -20,6 +20,15 @@ if($user_id) {
 		<link rel="stylesheet" type="text/css" href="styles/style.css">
 		<link media="handheld, only screen and (max-width: 480px), only screen and (max-device-width: 480px)" 
 		href="styles/mobile.css" type="text/css" rel="stylesheet" />
+		<script>
+			function toggleinputs() {
+				if (document.getElementById('group1now').checked) {
+					document.getElementById('when_start_time').style.visibility = 'hidden';
+				} else {
+					document.getElementById('when_start_time').style.visibility = '';
+				}
+			}
+		</script>
 	</head>
 	<body>
 		<!-- Header -->
@@ -50,12 +59,12 @@ if($user_id) {
 			
 			<span>When do you want to do this?</span>
 			
-			<div class = "now_or_later">
-				<input type="radio" name="group1" value="Now"> Now
-				<input type="radio" name="group1" value="Later" checked> Later<br>
+			<div class = "now_or_later" >
+				<input type="radio" name="group1" id="group1now" value="Now" onclick="toggleinputs();" onchange="toggleinputs();"> Now
+				<input type="radio" name="group1" id="group1later" value="Later" onclick="toggleinputs();" onchange="toggleinputs();" checked> Later<br>
 			</div>
 			
-			<div class = "when_start_time">
+			<div class = "when_start_time" id="when_start_time">
 				<input type="date" name="sdate" class = "start_date_entry"/>
 				<input type="time" name="stime" class = "start_time_entry"/>
 			</div>
