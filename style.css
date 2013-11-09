@@ -181,7 +181,7 @@ body {
 	font-style: italic;
 }
 
-.divider_matched, .divider_all_pings {
+.divider_matched, .divider_all_pings, .divider_my_pings {
 	display: block;
 	position: relative;
 	width: 500px;
@@ -189,7 +189,7 @@ body {
 	margin: 15px 0 -10px -250px;
 }
 
-.divider_matched span, .divider_all_pings span {
+.divider_matched span, .divider_all_pings span, .divider_my_pings span {
 	display: block;
 	position: relative;
 	height: 12px;

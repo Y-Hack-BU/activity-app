@@ -1,6 +1,4 @@
 <?php
-ini_set('display_errors',1); 
-error_reporting(E_ALL);
 require_once('php-sdk/src/facebook.php');
 require_once('functions.php');
 
@@ -18,6 +16,7 @@ if($user_id) {
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="styles/style.css">
 		<link media="handheld, only screen and (max-width: 480px), only screen and (max-device-width: 480px)" 
 		href="styles/mobile.css" type="text/css" rel="stylesheet" />
@@ -25,9 +24,14 @@ if($user_id) {
 	<body>
 		<!-- Header -->
 		<div class = "header">
-			<div class = "header_logo">
-				<img src = "../img/pinguin_logo.png" />
-				<span>Pinguin</span>
+			<a href = "index.php">
+				<div class = "header_logo">
+					<img src = "../img/pinguin_logo.png" />
+					<span>Pinguin</span>
+				</div>
+			</a>
+			<div class = "go_to_my_pings">
+				<span><a href = "/my_pings.php">My pings</a></span>
 			</div>
 		</div>
     <form action="people_entry.php?type=<?=$_GET['type']?>" method="post">
@@ -50,9 +54,19 @@ if($user_id) {
 				<input type="time" name="stime" class = "start_time_entry"/>
 			</div>
 			
-			<div class = "when_end_time">
-				<input type="date" name="edate" class = "end_date_entry"/>
-				<input type="time" name="etime" class = "end_time_entry"/>
+			<div class = "when_duration">
+				<span>Duration</span>
+				<select name="duration" class = "duration_entry">
+					<option value = "3600">1 hour</option>
+					<option value = "7200">2 hours</option>
+					<option value = "10800">3 hours</option>
+					<option value = "18000">5 hours</option>
+					<option value = "36000">10 hours</option>
+					<option value = "86400">1 day</option>
+					<option value = "172800">2 days</option>
+					<option value = "345600">4 days</option>
+					<option value = "604800">1 week</option>
+				</select>
 			</div>
 			
 		</div>

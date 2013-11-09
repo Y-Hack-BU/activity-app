@@ -13,9 +13,8 @@ $facebook = new Facebook($config);
 $user_id = $facebook->getUser();
 
 SetUpSQL();
-$a1 = explode(":", $_POST['etime']);
 $a2 = explode(":", $_POST['stime']);
-$duration = intval($a1[0]) * 3600 + intval($a1[1])*60;
+$duration = intval($_POST['duration']);
 $offset = intval($a2[0]) * 3600 + intval($a2[1])*60;
 $flids = array();
 $start = strtotime($_POST['sdate']) + $offset;

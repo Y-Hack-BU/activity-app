@@ -12,7 +12,6 @@ $user_id = $facebook->getUser();
 
 SetUpSQL();
 if($user_id) {
-	UpdateFriendsLists($facebook);
 ?>
 <html>
 	<head>
@@ -25,54 +24,41 @@ if($user_id) {
 	<body>
 		<!-- Header -->
 		<div class = "header">
-			<a href = "index.php">
+			<a href = "index.html">
 				<div class = "header_logo">
 					<img src = "../img/pinguin_logo.png" />
 					<span>Pinguin</span>
 				</div>
 			</a>
-			<div class = "go_to_my_pings">
-				<span><a href = "/my_pings.php">My pings</a></span>
+			
+			<div class = "go_to_all_pings">
+				<span><a href = "/index.html">All pings</a></span>
 			</div>
 		</div>
 		
-		<form action="submit.php?type=<?=$_GET['type']?>" method="post">
-		<?PHP
-			foreach ($_POST as $k=>$v) {
-				?>
-					<input type="hidden" name="<?=$k?>" value="<?=$v?>" />
-				<?PHP
-			}
-		?>
-		<div class = "people_to_share">
-			
-			<span>With whom do you want to share with?</span>
-			
-			<div class = "groups_checklist">
-
-			<?PHP
-				$flists = GetFriendsLists($facebook);
-				foreach ($flists as $flist) {
-			?>
-				<div class = "group_checkbox">
-					<span><?=$flist['name']?></span>
-					<input type="checkbox" name="flid_<?=$flist['flid']?>" unchecked>
-				</div>
-				
+		<div class = "my_pings_timeline">
+			<div class = "divider_all_pings">
+				<span>My Pings</span>
 				<hr>
-				<?PHP
-			}
-			?>
-
-
 			</div>
+<?php
+	$mypings = GetUnexpiredPings($user_id);
+	foreach ($mypings as $ping) {
+		$ping = GetPingData($ping);
+?>
+			<div class = "timeline_item">
+				<a href="delete.php?pid=<?=$ping['id']?>"><img src = "../img/x-it.png" /></a>
+				<span class = "timeline_name"><?=GetName($ping['owner_uid'])?></span>
+				<span class = "timeline_wants_to"><?=WantsToCaption($ping)?></span>
+				<span class = "timeline_time"><?=TimeCaption($ping)?></span>
+				<span class = "timeline_details"><?=(strlen($ping['detail']) > 0 ? "\"".$ping['detail']."\"" : "")?></span>
+			</div>	
+			<?php
+		}
+		?>
 			
 		</div>
 		
-		<div class = "who_submit_button">
-				<span><input type="submit" value="Submit" /></span>
-		</div>
-		</form>
 	</body>
 </html>
 <?PHP

@@ -85,8 +85,8 @@ function SetUpSQL() {
 	}
 }
 
-function DeletePing($pingid) {
-	$query = mysql_query("DELETE FROM pings WHERE id = $pingid;");
+function DeletePing($pingid, $user_id) {
+	$query = mysql_query("DELETE FROM pings WHERE id = $pingid AND owner_uid = $user_id;");
 	if (!$query) {
 		die("Query error");
 	}
@@ -230,7 +230,7 @@ function TimeCaption($pingdata) {
 	if (intval($pingdata['start']) < time()) {
 		return "@ Now";
 	} else {
-		return "@ ".date("D m.d.y H", intval($pingdata['start']))." (".$pingdata['duration'].")";
+		return "@ ".date("D n/j G:i", intval($pingdata['start']))." (".round($pingdata['duration']/3600, 1)." h)";
 	}
 }
 ?>

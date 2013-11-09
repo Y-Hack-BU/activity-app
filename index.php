@@ -21,9 +21,14 @@ $user_id = $facebook->getUser();
 	<body>
 		<!-- Header -->
 		<div class = "header">
-			<div class = "header_logo">
-				<img src = "../img/pinguin_logo.png" />
-				<span>Pinguin</span>
+			<a href = "index.php">
+				<div class = "header_logo">
+					<img src = "../img/pinguin_logo.png" />
+					<span>Pinguin</span>
+				</div>
+			</a>
+			<div class = "go_to_my_pings">
+				<span><a href = "/my_pings.php">My pings</a></span>
 			</div>
 		</div>
 <?PHP
@@ -54,13 +59,16 @@ if($user_id) {
 		</div>
 		
 		<div class = "timeline">
+			<div class = "divider_matched">
+				<span>Pingbacks</span>
+				<hr>
+			</div>
 <?PHP
 $matches = GetMatchingPings($user_id);
 foreach ($matches as $match) {
 	$ping = GetPingData($match);
 ?>
 			<div class = "timeline_item">
-				<img src = "../img/x-it.png" />
 				<span class = "timeline_name"><?=GetName($ping['owner_uid'])?></span>
 				<span class = "timeline_wants_to"><?=WantsToCaption($ping)?></span>
 				<span class = "timeline_time"><?=TimeCaption($ping)?></span>
@@ -69,14 +77,16 @@ foreach ($matches as $match) {
 <?PHP
 }
 ?>
-<br /><br />
+			<div class = "divider_all_pings">
+				<span>All pings</span>
+				<hr>
+			</div>
 <?PHP
 $feed = GetAllFriendlyPings($user_id);
 foreach ($feed as $pingid) {
 	$ping = GetPingData($pingid);
 ?>
 			<div class = "timeline_item">
-				<img src = "../img/x-it.png" />
 				<span class = "timeline_name"><?=GetName($ping['owner_uid'])?></span>
 				<span class = "timeline_wants_to"><?=WantsToCaption($ping)?></span>
 				<span class = "timeline_time"><?=TimeCaption($ping)?></span>
@@ -92,7 +102,7 @@ foreach ($feed as $pingid) {
 ?>		
 		<img id = "login_pinguin" src = "../img/pinguin_logo.png" />
 		
-		<div style="margin:0 auto;display: block;position: relative;left: 50%;margin-left: -365px;margin-top: 0px;width: 160px;height: 200px;">
+		<div id="login_with_fb">
 		<a href="<?=$login_url?>"><img src="login_with_facebook.png" /></a>
 		</div>
 		

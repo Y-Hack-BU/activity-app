@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors',1); 
+error_reporting(E_ALL);
 require_once('php-sdk/src/facebook.php');
 require_once('functions.php');
 
@@ -10,9 +12,7 @@ $config = array(
 $facebook = new Facebook($config);
 $user_id = $facebook->getUser();
 
-SetUpSQL();
 if($user_id) {
-	UpdateFriendsLists($facebook);
 ?>
 <html>
 	<head>
@@ -31,48 +31,22 @@ if($user_id) {
 					<span>Pinguin</span>
 				</div>
 			</a>
+			
 			<div class = "go_to_my_pings">
 				<span><a href = "/my_pings.php">My pings</a></span>
 			</div>
 		</div>
 		
-		<form action="submit.php?type=<?=$_GET['type']?>" method="post">
-		<?PHP
-			foreach ($_POST as $k=>$v) {
-				?>
-					<input type="hidden" name="<?=$k?>" value="<?=$v?>" />
-				<?PHP
-			}
-		?>
-		<div class = "people_to_share">
-			
-			<span>With whom do you want to share with?</span>
-			
-			<div class = "groups_checklist">
-
-			<?PHP
-				$flists = GetFriendsLists($facebook);
-				foreach ($flists as $flist) {
-			?>
-				<div class = "group_checkbox">
-					<span><?=$flist['name']?></span>
-					<input type="checkbox" name="flid_<?=$flist['flid']?>" unchecked>
-				</div>
-				
-				<hr>
-				<?PHP
-			}
-			?>
-
-
+		<div class = "success">
+			<span>You created a ping successfully!</span>
+		</div>
+	
+		<a href = "index.php">
+			<div class = "go_home_button">
+				<span>Go back to the main page</span>
 			</div>
-			
-		</div>
+		</a>
 		
-		<div class = "who_submit_button">
-				<span><input type="submit" value="Submit" /></span>
-		</div>
-		</form>
 	</body>
 </html>
 <?PHP
