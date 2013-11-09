@@ -1,3 +1,20 @@
+<?php
+ini_set('display_errors',1); 
+error_reporting(E_ALL);
+require_once('php-sdk/src/facebook.php');
+require_once('functions.php');
+
+$config = array(
+  'appId' => '753931801289347',
+  'secret' => 'e95fb268d31c8b910bc5831cfeb65e83',
+  );
+
+$facebook = new Facebook($config);
+$user_id = $facebook->getUser();
+
+SetUpSQL();
+if($user_id) {
+?>
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
@@ -13,10 +30,10 @@
 				<span>Pinguin</span>
 			</div>
 		</div>
-		
+    <form action="people_entry.php" method="post">
 		<div class = "add_details">
 			<span>Do you want to add any details?</span>
-			<input type = "text" class = "details_question_input" line = "2"/>
+			<input type = "text" name="details" class = "details_question_input" line = "2"/>
 		</div>
 		
 		<div class = "when">
@@ -29,20 +46,27 @@
 			</div>
 			
 			<div class = "when_start_time">
-				<input type="date" class = "start_date_entry"/>
-				<input type="time" class = "start_time_entry"/>
+				<input type="date" name="sdate" class = "start_date_entry"/>
+				<input type="time" name="stime" class = "start_time_entry"/>
 			</div>
 			
 			<div class = "when_end_time">
-				<input type="date" class = "end_date_entry"/>
-				<input type="time" class = "end_time_entry"/>
+				<input type="date" name="edate" class = "end_date_entry"/>
+				<input type="time" name="etime" class = "end_time_entry"/>
 			</div>
 			
 		</div>
 		
 		<div class = "when_next_button">
-				<span>Next</span>
+				<span><input type="submit" value="Next" /></span>
 		</div>
+	</form>
+
 		
 	</body>
 </html>
+<?PHP
+} else {
+	header("Location: index.php");
+}
+?>
